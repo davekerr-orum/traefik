@@ -94,6 +94,7 @@ func (e *entryPointTracing) ServeHTTP(rw http.ResponseWriter, req *http.Request)
 		}
 
 		attrs = append(attrs, semconv.HTTPRequestMethodKey.String(req.Method))
+		attrs = append(attrs, semconv.HTTPRouteKey.String(req.URL.Path))
 		attrs = append(attrs, semconv.HTTPResponseStatusCode(recorder.Status()))
 		attrs = append(attrs, semconv.NetworkProtocolName(strings.ToLower(req.Proto)))
 		attrs = append(attrs, semconv.NetworkProtocolVersion(Proto(req.Proto)))
